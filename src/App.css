@@ -1,0 +1,52 @@
+.app {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+.room-box input {
+  padding: 8px;
+  margin-right: 8px;
+}
+
+.room-box button {
+  padding: 8px 12px;
+}
+
+.room {
+  font-weight: bold;
+}
+
+.last {
+  margin-top: 10px;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(5, 60px);
+  gap: 8px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.cell {
+  width: 60px;
+  height: 60px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.marked {
+  background-color: crimson;
+  color: white;
+}
+
+.turn {
+  margin-top: 12px;
+  font-weight: bold;
+}
+
+.result {
+  color: green;
+}
