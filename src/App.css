@@ -1,107 +1,122 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap');
 
-/* --- Global Reset --- */
+/* ============================
+   1. GLOBAL RESET & BASE
+   ============================ */
 * {
   box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent; /* Removes blue highlight on tap */
+  -webkit-tap-highlight-color: transparent; /* Remove blue tap box on mobile */
+  touch-action: manipulation; /* Improves touch response */
 }
 
 body {
   margin: 0;
+  padding: 0;
   font-family: 'Poppins', sans-serif;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   min-height: 100vh;
+  /* Centers content on Desktop */
   display: flex;
-  align-items: center;
+  align-items: center; 
   justify-content: center;
   color: #333;
-  /* Reduced body padding for mobile */
-  padding: 10px; 
 }
 
-/* --- Main Container --- */
+/* ============================
+   2. MAIN CONTAINER & CARD
+   ============================ */
 .container {
   width: 100%;
-  max-width: 600px; /* Limits width on desktop */
-  margin: 0 auto;
+  max-width: 600px; /* Optimal reading width for Desktop */
+  padding: 20px;
 }
 
-/* --- Game Card (The White Box) --- */
 .game-card {
-  background: rgba(255, 255, 255, 0.96);
-  padding: 25px;
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  background: rgba(255, 255, 255, 0.98);
+  padding: 30px;
+  border-radius: 24px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
   text-align: center;
-  border: 4px solid transparent;
+  border: 4px solid transparent; /* Prevents layout jump when border changes */
   transition: all 0.3s ease;
+  overflow: hidden;
 }
 
+/* Specific Lobby Styling */
 .lobby-card {
   max-width: 450px;
   margin: 0 auto;
 }
 
 h1 {
-  margin-top: 0;
-  font-size: 2.2rem;
+  margin: 0 0 20px 0;
+  font-size: 2.5rem;
   color: #4a4a4a;
-  margin-bottom: 20px;
-  line-height: 1.1;
+  letter-spacing: -1px;
 }
 
-/* --- Tabs --- */
+/* ============================
+   3. TABS (Create / Join)
+   ============================ */
 .tabs {
   display: flex;
-  margin-bottom: 15px;
-  border-bottom: 2px solid #e2e8f0;
+  margin-bottom: 25px;
+  background: #f1f5f9;
+  border-radius: 12px;
+  padding: 5px;
 }
 
 .tabs button {
   flex: 1;
   background: transparent;
-  color: #718096;
-  border-radius: 0;
+  color: #64748b;
+  border-radius: 8px;
   box-shadow: none;
-  padding: 12px;
-  border-bottom: 4px solid transparent;
+  padding: 10px;
   font-size: 1rem;
+  border: none;
+  transition: all 0.2s;
 }
 
 .tabs button.active {
+  background: white;
   color: #667eea;
-  border-bottom: 4px solid #667eea;
   font-weight: 800;
-  background: #f8fafc;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
-/* --- Inputs & Buttons --- */
+/* ============================
+   4. INPUTS & CONTROLS
+   ============================ */
 .input-group {
-  margin: 15px 0;
+  margin: 20px 0;
   display: flex;
   gap: 10px;
   justify-content: center;
 }
 
 input {
-  padding: 12px;
-  font-size: 1.1rem;
-  border: 2px solid #ddd;
+  padding: 15px;
+  font-size: 1.2rem;
+  border: 2px solid #e2e8f0;
   border-radius: 12px;
   outline: none;
   width: 100%;
   text-transform: uppercase;
   text-align: center;
-  letter-spacing: 2px;
-  background: #fff;
+  letter-spacing: 3px;
+  background: #f8fafc;
+  color: #333;
+  transition: border 0.2s;
 }
 
 input:focus {
   border-color: #667eea;
+  background: #fff;
 }
 
 button {
-  padding: 12px 20px;
+  padding: 12px 24px;
   font-size: 1rem;
   font-weight: 600;
   border: none;
@@ -109,194 +124,179 @@ button {
   cursor: pointer;
   background: #667eea;
   color: white;
-  transition: transform 0.1s, background 0.3s;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: transform 0.1s, background 0.2s;
+  box-shadow: 0 4px 10px rgba(102, 126, 234, 0.3);
   white-space: nowrap;
 }
 
-button:active { transform: scale(0.98); }
-button.secondary { background: #e2e8f0; color: #4a5568; }
-button.primary-btn { width: 100%; padding: 15px; font-size: 1.1rem; margin-top: 5px; }
-button:disabled { background: #cbd5e0; cursor: not-allowed; transform: none; }
+button:active { transform: scale(0.96); }
+button:hover { background: #5a6fd6; }
+button.secondary { background: #e2e8f0; color: #475569; box-shadow: none; }
+button.primary-btn { width: 100%; padding: 15px; font-size: 1.1rem; margin-top: 10px; }
+button:disabled { background: #cbd5e0; cursor: not-allowed; transform: none; box-shadow: none; }
 
-/* --- Header Info --- */
+/* ============================
+   5. GAME HEADER & STATUS
+   ============================ */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 15px;
-}
-
-.room-badge, .role-badge, .score-board {
-  padding: 5px 10px;
-  border-radius: 12px;
-  font-size: 0.85rem;
-  font-weight: 700;
-}
-
-.room-badge { background: #edf2f7; color: #4a5568; border: 1px solid #cbd5e0; }
-.role-badge { background: #2d3748; color: white; }
-.score-board { background: #feebc8; color: #c05621; }
-
-/* --- Status Bars --- */
-.status-bar {
+  gap: 10px;
+  margin-bottom: 20px;
+  background: #f8fafc;
   padding: 10px;
-  border-radius: 10px;
+  border-radius: 12px;
+}
+
+.room-badge, .role-badge {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.score-board {
+  background: #fff7ed;
+  color: #c2410c;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-weight: 800;
+  border: 1px solid #ffedd5;
+}
+
+/* Status Bars */
+.status-bar {
+  padding: 12px;
+  border-radius: 12px;
   margin-bottom: 15px;
   font-weight: 600;
-  font-size: 0.95rem;
-  line-height: 1.4;
+  font-size: 1rem;
+  text-align: center;
 }
 
-.status-bar.setup { background-color: #f7fafc; color: #4a5568; border: 2px dashed #cbd5e0; }
-.status-bar.waiting { background-color: #fff3cd; color: #856404; }
-.status-bar.your-turn { background-color: #d4edda; color: #155724; border: 2px solid #c3e6cb; }
-.status-bar.opponent-turn { background-color: #fff3cd; color: #856404; border: 2px solid #ffeeba; }
-.status-bar.start-zone { background-color: #ebf8ff; color: #2b6cb0; border: 2px solid #bee3f8; animation: pulse 2s infinite; }
+.status-bar.setup { background: #f1f5f9; color: #475569; border: 2px dashed #cbd5e0; }
+.status-bar.waiting { background: #fffbeb; color: #b45309; border: 2px solid #fcd34d; }
+.status-bar.your-turn { background: #dcfce7; color: #15803d; border: 2px solid #86efac; animation: pop 0.3s; }
+.status-bar.opponent-turn { background: #fff1f2; color: #be123c; border: 2px solid #fda4af; }
+.status-bar.start-zone { background: #eff6ff; color: #1d4ed8; border: 2px solid #93c5fd; animation: pulse 2s infinite; }
 
-.start-btn { width: 100%; background: #48bb78; padding: 12px; font-size: 1.1rem; }
+.start-btn { width: 100%; background: #22c55e; padding: 15px; font-size: 1.2rem; }
+.start-btn:hover { background: #16a34a; }
 
-/* --- THE GRID --- */
+/* ============================
+   6. THE BINGO GRID
+   ============================ */
 .grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 6px;
+  gap: 8px;
   width: 100%;
-  margin-top: 5px;
+  margin: 0 auto;
 }
 
 .cell {
   background: white;
   border: 2px solid #e2e8f0;
-  border-radius: 8px;
+  border-radius: 12px;
+  /* Forces a perfect square */
   aspect-ratio: 1 / 1;
   display: flex;
   align-items: center;
   justify-content: center;
   
-  /* Smart Font Sizing */
-  font-size: clamp(0.9rem, 4vw, 1.8rem);
-  font-weight: 800;
-  color: #4a5568;
+  /* Fluid Typography: Text scales with cell size */
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  font-weight: 700;
+  color: #475569;
   
   cursor: pointer;
   user-select: none;
+  transition: all 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.cell:hover { border-color: #667eea; }
-.cell.marked { background: #fc8181; color: white; border-color: #fc8181; text-decoration: line-through; }
-.cell.empty { border: 2px dashed #cbd5e0; background: #f8fafc; }
-.grid.disabled .cell { cursor: not-allowed; opacity: 0.6; }
+.cell:hover { border-color: #667eea; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+.cell.marked { background: #f87171; color: white; border-color: #f87171; text-decoration: line-through; opacity: 0.9; }
+.cell.empty { border: 2px dashed #cbd5e0; background: #f8fafc; color: #cbd5e0; }
 
-/* --- Win Overlay --- */
+/* Disabled grid state */
+.grid.disabled .cell { cursor: not-allowed; opacity: 0.6; filter: grayscale(1); }
+.grid.disabled .cell:hover { transform: none; border-color: #e2e8f0; box-shadow: none; }
+
+/* ============================
+   7. OVERLAYS & ANIMATIONS
+   ============================ */
 .overlay {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0, 0, 0, 0.9);
+  background: rgba(15, 23, 42, 0.9);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
+  z-index: 2000;
+  backdrop-filter: blur(5px);
   padding: 20px;
-  text-align: center;
 }
 
-.overlay h1 { color: #fff; font-size: 2.5rem; margin-bottom: 20px; }
-.overlay button { background: #48bb78; padding: 15px; font-size: 1.1rem; width: 100%; max-width: 250px; }
+.overlay h1 { color: #fff; font-size: 3.5rem; text-shadow: 0 4px 0 rgba(0,0,0,0.2); margin-bottom: 30px; }
 
-@keyframes pulse {
-  0% { box-shadow: 0 0 0 0 rgba(66, 153, 225, 0.4); }
-  70% { box-shadow: 0 0 0 10px rgba(66, 153, 225, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(66, 153, 225, 0); }
-}
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); } 100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); } }
+@keyframes pop { 0% { transform: scale(0.95); } 50% { transform: scale(1.02); } 100% { transform: scale(1); } }
 
-/* =========================================
-   MOBILE RESPONSIVENESS (Phones)
-   ========================================= */
+/* ============================
+   8. MOBILE RESPONSIVENESS
+   ============================ */
 @media (max-width: 600px) {
   
-  /* Reduce outer spacing */
+  /* 1. Reset Body Alignment for Mobile */
   body {
+    align-items: flex-start; /* Prevents top being cut off */
     padding: 0;
-    align-items: flex-start; /* Aligns to top on mobile */
+    background: #f8fafc; /* Simpler background for mobile performance */
   }
 
-  /* Expand card to full width with reduced padding */
+  /* 2. Full Width Container */
   .container {
     max-width: 100%;
-    margin: 0;
     padding: 0;
+    margin: 0;
   }
 
+  /* 3. Card becomes the full screen */
   .game-card {
-    min-height: 100vh; /* Takes full height */
-    border-radius: 0; /* No corners on full screen */
-    padding: 15px 10px; /* Tighter internal padding */
+    min-height: 100dvh; /* Dynamic Viewport Height handles URL bar */
+    border-radius: 0;
+    border: none;
     box-shadow: none;
-  }
-
-  h1 {
-    font-size: 1.8rem;
-    margin-bottom: 10px;
-  }
-
-  /* Reduce input/button margins */
-  .input-group {
+    padding: 15px;
+    display: flex;
     flex-direction: column;
-    margin: 10px 0;
   }
 
-  input {
-    width: 100%;
-    margin-bottom: 5px;
-    padding: 10px;
+  /* 4. Adjust Typography */
+  h1 { font-size: 1.8rem; margin-bottom: 15px; }
+
+  /* 5. Stack Inputs */
+  .input-group { flex-direction: column; width: 100%; margin: 15px 0; }
+  input { margin-bottom: 8px; width: 100%; }
+  button { width: 100%; padding: 14px; }
+
+  /* 6. Tighter Grid */
+  .grid { gap: 5px; margin-top: auto; margin-bottom: auto; /* Vertically center grid if space allows */ }
+  .cell { 
+    border-radius: 8px; 
+    border-width: 1px;
+    /* Increase font size on mobile relative to cell */
+    font-size: clamp(1rem, 5vw, 1.5rem); 
   }
 
-  button {
-    width: 100%;
-    padding: 12px;
-  }
-  
-  .tabs {
-    margin-bottom: 10px;
-  }
-  
-  /* Tighter Header */
-  .header {
-    justify-content: space-between;
-    margin-bottom: 10px;
-  }
-  
-  .room-badge, .role-badge {
-    font-size: 0.75rem;
-    padding: 4px 8px;
-  }
+  /* 7. Header adjustments */
+  .header { padding: 5px; margin-bottom: 15px; background: transparent; }
+  .room-badge, .role-badge { font-size: 0.7rem; padding: 4px 8px; background: #e2e8f0; }
 
-  /* Scoreboard full width */
-  .score-board {
-    width: 100%;
-    margin-top: 5px;
-  }
-
-  /* Grid adjustments */
-  .grid {
-    gap: 4px; /* Very tight gap for small screens */
-  }
-
-  .cell {
-    border-width: 2px;
-    border-radius: 6px;
-    /* Font size handled by clamp(), but ensured here */
-    font-size: 1.1rem; 
-  }
-}
-
-/* Tiny screens (iPhone SE / Fold) */
-@media (max-width: 350px) {
-  .cell { font-size: 0.9rem; }
-  h1 { font-size: 1.5rem; }
-  .game-card { padding: 10px 5px; }
+  /* 8. Overlay adjustments */
+  .overlay h1 { font-size: 2.5rem; }
 }
