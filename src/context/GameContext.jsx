@@ -157,8 +157,8 @@ import io from "socket.io-client";
 const GameContext = createContext();
 
 // ⬇️ REPLACE THIS WITH YOUR ACTUAL RENDER URL ⬇️
-const SOCKET_URL = "http://localhost:3001"; 
-// const SOCKET_URL = "https://bingo-server-bvpo.onrender.com"; 
+// const SOCKET_URL = "http://localhost:3001"; 
+const SOCKET_URL = "https://bingo-server-bvpo.onrender.com"; 
 
 const socket = io.connect(SOCKET_URL);
 
