@@ -1,25 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap');
 
 /* ============================
-   1. GLOBAL RESET & BASE
+   1. GLOBAL RESET
    ============================ */
 * {
   box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent; /* Remove blue tap box on mobile */
-  touch-action: manipulation; /* Improves touch response */
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
   margin: 0;
-  padding: 0;
   font-family: 'Poppins', sans-serif;
+  /* The Gradient Background stays on Mobile too */
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   min-height: 100vh;
-  /* Centers content on Desktop */
   display: flex;
-  align-items: center; 
+  align-items: center;
   justify-content: center;
   color: #333;
+  /* Small padding on body prevents card from touching screen edges */
+  padding: 15px; 
 }
 
 /* ============================
@@ -27,32 +27,30 @@ body {
    ============================ */
 .container {
   width: 100%;
-  max-width: 600px; /* Optimal reading width for Desktop */
-  padding: 20px;
+  max-width: 550px; /* Optimal width for the game */
+  margin: 0 auto;
 }
 
 .game-card {
   background: rgba(255, 255, 255, 0.98);
-  padding: 30px;
-  border-radius: 24px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  /* Desktop Padding */
+  padding: 30px; 
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
   text-align: center;
-  border: 4px solid transparent; /* Prevents layout jump when border changes */
   transition: all 0.3s ease;
-  overflow: hidden;
-}
-
-/* Specific Lobby Styling */
-.lobby-card {
-  max-width: 450px;
-  margin: 0 auto;
+  
+  /* Ensures buttons/inputs don't overflow */
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 h1 {
-  margin: 0 0 20px 0;
-  font-size: 2.5rem;
+  margin: 0;
+  font-size: 2.2rem;
   color: #4a4a4a;
-  letter-spacing: -1px;
+  line-height: 1.2;
 }
 
 /* ============================
@@ -60,10 +58,10 @@ h1 {
    ============================ */
 .tabs {
   display: flex;
-  margin-bottom: 25px;
   background: #f1f5f9;
   border-radius: 12px;
-  padding: 5px;
+  padding: 4px;
+  gap: 5px;
 }
 
 .tabs button {
@@ -71,52 +69,44 @@ h1 {
   background: transparent;
   color: #64748b;
   border-radius: 8px;
-  box-shadow: none;
   padding: 10px;
   font-size: 1rem;
   border: none;
-  transition: all 0.2s;
+  font-weight: 600;
 }
 
 .tabs button.active {
   background: white;
   color: #667eea;
-  font-weight: 800;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
 /* ============================
-   4. INPUTS & CONTROLS
+   4. INPUTS & BUTTONS (No Overlap)
    ============================ */
+/* This flex container handles the spacing automatically */
 .input-group {
-  margin: 20px 0;
   display: flex;
-  gap: 10px;
-  justify-content: center;
+  gap: 10px; /* 10px gap between Input and Button */
+  width: 100%;
 }
 
 input {
-  padding: 15px;
-  font-size: 1.2rem;
+  flex: 2; /* Takes up 2/3 space */
+  padding: 12px;
+  font-size: 1.1rem;
   border: 2px solid #e2e8f0;
   border-radius: 12px;
   outline: none;
-  width: 100%;
   text-transform: uppercase;
   text-align: center;
-  letter-spacing: 3px;
   background: #f8fafc;
-  color: #333;
-  transition: border 0.2s;
 }
 
-input:focus {
-  border-color: #667eea;
-  background: #fff;
-}
+input:focus { border-color: #667eea; background: #fff; }
 
 button {
-  padding: 12px 24px;
+  padding: 12px 20px;
   font-size: 1rem;
   font-weight: 600;
   border: none;
@@ -124,179 +114,121 @@ button {
   cursor: pointer;
   background: #667eea;
   color: white;
-  transition: transform 0.1s, background 0.2s;
-  box-shadow: 0 4px 10px rgba(102, 126, 234, 0.3);
   white-space: nowrap;
+  transition: transform 0.1s;
 }
 
 button:active { transform: scale(0.96); }
-button:hover { background: #5a6fd6; }
-button.secondary { background: #e2e8f0; color: #475569; box-shadow: none; }
-button.primary-btn { width: 100%; padding: 15px; font-size: 1.1rem; margin-top: 10px; }
-button:disabled { background: #cbd5e0; cursor: not-allowed; transform: none; box-shadow: none; }
+button.primary-btn { width: 100%; padding: 15px; font-size: 1.1rem; }
+button:disabled { background: #cbd5e0; cursor: not-allowed; }
 
 /* ============================
-   5. GAME HEADER & STATUS
+   5. HEADER & STATUS
    ============================ */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 20px;
   background: #f8fafc;
-  padding: 10px;
+  padding: 8px 12px;
   border-radius: 12px;
+  font-size: 0.9rem;
 }
 
-.room-badge, .role-badge {
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: #64748b;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
+.room-badge { font-weight: 700; color: #64748b; }
+.score-board { background: #fff7ed; color: #c2410c; padding: 4px 10px; border-radius: 10px; font-weight: 800; }
 
-.score-board {
-  background: #fff7ed;
-  color: #c2410c;
-  padding: 5px 12px;
-  border-radius: 20px;
-  font-weight: 800;
-  border: 1px solid #ffedd5;
-}
-
-/* Status Bars */
 .status-bar {
   padding: 12px;
-  border-radius: 12px;
-  margin-bottom: 15px;
+  border-radius: 10px;
   font-weight: 600;
   font-size: 1rem;
-  text-align: center;
 }
 
 .status-bar.setup { background: #f1f5f9; color: #475569; border: 2px dashed #cbd5e0; }
-.status-bar.waiting { background: #fffbeb; color: #b45309; border: 2px solid #fcd34d; }
-.status-bar.your-turn { background: #dcfce7; color: #15803d; border: 2px solid #86efac; animation: pop 0.3s; }
+.status-bar.your-turn { background: #dcfce7; color: #15803d; border: 2px solid #86efac; }
 .status-bar.opponent-turn { background: #fff1f2; color: #be123c; border: 2px solid #fda4af; }
-.status-bar.start-zone { background: #eff6ff; color: #1d4ed8; border: 2px solid #93c5fd; animation: pulse 2s infinite; }
-
-.start-btn { width: 100%; background: #22c55e; padding: 15px; font-size: 1.2rem; }
-.start-btn:hover { background: #16a34a; }
+.status-bar.start-zone { background: #eff6ff; color: #1d4ed8; border: 2px solid #93c5fd; }
 
 /* ============================
-   6. THE BINGO GRID
+   6. GRID LAYOUT
    ============================ */
 .grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 8px;
+  gap: 8px; /* Desktop Gap */
   width: 100%;
-  margin: 0 auto;
 }
 
 .cell {
   background: white;
   border: 2px solid #e2e8f0;
-  border-radius: 12px;
-  /* Forces a perfect square */
+  border-radius: 10px;
   aspect-ratio: 1 / 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  
-  /* Fluid Typography: Text scales with cell size */
-  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  font-size: clamp(1rem, 2.5vw, 1.6rem); /* Responsive Font */
   font-weight: 700;
   color: #475569;
-  
   cursor: pointer;
   user-select: none;
-  transition: all 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.cell:hover { border-color: #667eea; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-.cell.marked { background: #f87171; color: white; border-color: #f87171; text-decoration: line-through; opacity: 0.9; }
-.cell.empty { border: 2px dashed #cbd5e0; background: #f8fafc; color: #cbd5e0; }
-
-/* Disabled grid state */
-.grid.disabled .cell { cursor: not-allowed; opacity: 0.6; filter: grayscale(1); }
-.grid.disabled .cell:hover { transform: none; border-color: #e2e8f0; box-shadow: none; }
+.cell:hover { border-color: #667eea; }
+.cell.marked { background: #f87171; color: white; border-color: #f87171; text-decoration: line-through; }
+.cell.empty { border: 2px dashed #cbd5e0; background: #f8fafc; }
 
 /* ============================
-   7. OVERLAYS & ANIMATIONS
+   7. MOBILE RESPONSIVENESS
    ============================ */
-.overlay {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(15, 23, 42, 0.9);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  z-index: 2000;
-  backdrop-filter: blur(5px);
-  padding: 20px;
-}
+@media (max-width: 500px) {
 
-.overlay h1 { color: #fff; font-size: 3.5rem; text-shadow: 0 4px 0 rgba(0,0,0,0.2); margin-bottom: 30px; }
-
-@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); } 100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); } }
-@keyframes pop { 0% { transform: scale(0.95); } 50% { transform: scale(1.02); } 100% { transform: scale(1); } }
-
-/* ============================
-   8. MOBILE RESPONSIVENESS
-   ============================ */
-@media (max-width: 600px) {
-  
-  /* 1. Reset Body Alignment for Mobile */
+  /* 1. Reduce body padding to utilize screen space */
   body {
-    align-items: flex-start; /* Prevents top being cut off */
-    padding: 0;
-    background: #f8fafc; /* Simpler background for mobile performance */
+    padding: 10px; 
+    align-items: flex-start; /* Push card to top */
+    padding-top: 20px;
   }
 
-  /* 2. Full Width Container */
-  .container {
-    max-width: 100%;
-    padding: 0;
-    margin: 0;
-  }
-
-  /* 3. Card becomes the full screen */
+  /* 2. Adjust Card Spacing */
   .game-card {
-    min-height: 100dvh; /* Dynamic Viewport Height handles URL bar */
-    border-radius: 0;
-    border: none;
-    box-shadow: none;
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
+    padding: 15px; /* Reduced from 30px */
+    border-radius: 16px;
+    gap: 10px; /* Reduces space between elements vertically */
   }
 
-  /* 4. Adjust Typography */
-  h1 { font-size: 1.8rem; margin-bottom: 15px; }
+  h1 { font-size: 1.8rem; }
 
-  /* 5. Stack Inputs */
-  .input-group { flex-direction: column; width: 100%; margin: 15px 0; }
-  input { margin-bottom: 8px; width: 100%; }
-  button { width: 100%; padding: 14px; }
-
-  /* 6. Tighter Grid */
-  .grid { gap: 5px; margin-top: auto; margin-bottom: auto; /* Vertically center grid if space allows */ }
-  .cell { 
-    border-radius: 8px; 
-    border-width: 1px;
-    /* Increase font size on mobile relative to cell */
-    font-size: clamp(1rem, 5vw, 1.5rem); 
+  /* 3. Stack Inputs and Buttons vertically on mobile */
+  .input-group {
+    flex-direction: column; /* Stack them */
+    gap: 8px; /* Space between input and button */
+  }
+  
+  input {
+    width: 100%;
+    margin: 0; /* Clear default margins */
   }
 
-  /* 7. Header adjustments */
-  .header { padding: 5px; margin-bottom: 15px; background: transparent; }
-  .room-badge, .role-badge { font-size: 0.7rem; padding: 4px 8px; background: #e2e8f0; }
+  button {
+    width: 100%; /* Full width buttons are easier to tap */
+    padding: 12px;
+  }
 
-  /* 8. Overlay adjustments */
-  .overlay h1 { font-size: 2.5rem; }
+  /* 4. Tighter Grid for Mobile */
+  .grid {
+    gap: 5px; /* Reduced gap from 8px */
+  }
+
+  .cell {
+    border-radius: 6px; /* Slightly sharper corners */
+    border-width: 1px; /* Thinner borders */
+  }
+  
+  /* 5. Header adjustments */
+  .header {
+    padding: 8px;
+    font-size: 0.8rem;
+  }
 }
