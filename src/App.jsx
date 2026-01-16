@@ -5,6 +5,7 @@ import GameHeader from "./components/GameHeader";
 import GameBoard from "./components/GameBoard";
 import GameControls from "./components/GameControls";
 import WinOverlay from "./components/WinOverlay";
+import EmojiReactor from "./components/EmojiReactor"; // <-- IMPORT THIS
 import "./App.css";
 
 const GameContainer = () => {
@@ -17,6 +18,7 @@ const GameContainer = () => {
       <GameHeader />
       <GameBoard />
       <GameControls />
+      <EmojiReactor /> 
       <WinOverlay />
     </div>
   );
